@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notes</title>
+    <link rel="stylesheet" href="/_layr/layr.css" />
+    <link rel="stylesheet" href="./main.css" />
+    <script src="/_layr/layr.js"></script>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div class="app" id="app">
+      <aside class="side">
+        <div class="side-head">
+          <input class="layr-input" id="search" type="search" placeholder="Search notes" autocomplete="off" />
+          <button class="layr-button primary icon" id="new" title="New note (Ctrl+Alt+N)" aria-label="New note">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M11 5h2v14h-2zM5 11h14v2H5z" fill="currentColor" /></svg>
+          </button>
+        </div>
+        <ul class="layr-list notes-list" id="list" role="listbox" aria-label="Notes"></ul>
+        <div class="side-foot layr-muted" id="count"></div>
+      </aside>
+
+      <section class="editor" id="editor" hidden>
+        <div class="layr-toolbar">
+          <button class="layr-button ghost icon back" id="back" title="All notes" aria-label="All notes">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z" fill="currentColor" /></svg>
+          </button>
+          <input class="title-input" id="title" placeholder="Untitled" autocomplete="off" aria-label="Title" />
+          <span class="save-state layr-muted" id="saveState"></span>
+          <div class="seg" role="group" aria-label="View">
+            <button class="layr-button small" data-mode="edit">Edit</button>
+            <button class="layr-button small" data-mode="split">Split</button>
+            <button class="layr-button small" data-mode="preview">Preview</button>
+          </div>
+          <button class="layr-button ghost icon" id="pin" title="Pin to the top" aria-label="Pin">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M16 3v2h-1v6l3 3v2h-5v5l-1 1-1-1v-5H6v-2l3-3V5H8V3z" fill="currentColor" /></svg>
+          </button>
+          <button class="layr-button ghost icon" id="delete" title="Delete note" aria-label="Delete note">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 6h12l-1 12H7z" fill="currentColor" /></svg>
+          </button>
+        </div>
+        <div class="panes" id="panes">
+          <textarea class="body-input" id="body" spellcheck="true" placeholder="Write in Markdown: # heading, **bold**, - list, [link](https://…)"></textarea>
+          <article class="preview md" id="preview"></article>
+        </div>
+      </section>
+
+      <section class="placeholder layr-empty" id="placeholder">
+        <svg viewBox="0 0 24 24" width="40" height="40" opacity="0.5"><path d="M5 3h10l4 4v14H5zm9 1.5V8h3.5zM8 12h8v1.5H8zm0 3h8v1.5H8zm0-6h4v1.5H8z" fill="currentColor" /></svg>
+        <div id="placeholderText">Pick a note, or make a new one.</div>
+        <button class="layr-button primary" id="new2">New note</button>
+      </section>
+    </div>
+  </body>
+</html>
