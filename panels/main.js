@@ -453,6 +453,21 @@ async function onChanged(data) {
   renderList();
 }
 
+/** Remote changes from sync: `{plugin, keys, collections: {notes: [ids]}}`. */
+async function onSynced(data) {
+  const ids = (data && data.collections && data.collections.notes) || [];
+  for (const id of ids) {
+    if (id === selected && dirty) continue; // we have newer edits here; ours go up after
+    await reloadOne(id);
+    if (id === selected) {
+      const n = notes.get(selected);
+      if (!n) select(null);
+      else if (document.activeElement !== els.body && document.activeElement !== els.title) select(selected);
+    }
+  }
+  if (ids.length) renderList();
+}
+
 async function main() {
   try {
     await layr.ready;
@@ -464,6 +479,8 @@ async function main() {
   wire();
   layr.events.on("notes:changed", (d) => onChanged(d).catch(() => {}));
   layr.events.on("notes:refresh", () => loadAll().then(renderList));
+  // Notes edited on another device arrived (sync): reload the ones that changed.
+  if (layr.data.onChange) layr.data.onChange((d) => onSynced(d).catch(() => {}));
 
   const state = layr.info.state || {};
   const params = layr.info.params || {};
