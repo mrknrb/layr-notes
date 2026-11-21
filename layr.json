@@ -1,7 +1,7 @@
 {
   "id": "notes",
   "name": "Notes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Notes in Markdown with a live preview, search and pinned notes.",
   "author": "layr",
   "layr": "^0.1",
